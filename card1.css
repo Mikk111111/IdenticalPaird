@@ -1,0 +1,25 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: #fff;
+    background-color: #3c00a0;
+}
+
+#board {
+    height: auto;
+    max-height: 250px;
+    width: auto;
+    max-width: 500px;
+    margin: auto auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #000000;
+    border: 10px solid white;
+}
+
+.card {
+    height: 48%;
+    width: 15.6%;
+    display: flex;
+    margin: 0.5%;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards Match</title>
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+<div class="container">
+  <div class="form-box">
+    <h1>!!!You Won!!!</h1>
+    <h1>Leaderboard</h1>
+    <form>
+      <div class="input-group">
+        <div class="input-field">
+          <input type="text" id="Name" placeholder="Name">
+        </div>
+        <div class="btn-field">
+          <button type="button" onclick="addPlayer()">Add Player</button>
+        </div>
+        <div class="dropdown">
+          <select id="leaderboard">
+            <option selected="selected">Choose a player</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+let leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
+
+window.onload = function() {
+    displayLeaderboard();
+}
+
+function displayLeaderboard() {
+    let select = document.getElementById('leaderboard');
+    select.innerHTML = ""; // Clear the current options
+    let option = document.createElement('option');
+    option.text = "Choose a player";
+    option.selected = "selected";
+    select.add(option);
+
+    // Sort the leaderboard in descending order of scores
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    // Display only the top 6 players
+    for (let i = 0; i < Math.min(6, leaderboard.length); i++) {
+        let option = document.createElement('option');
+        option.text = `${i+1}. ${leaderboard[i].name}: ${leaderboard[i].score}`;
+        select.add(option);
+    }
+}
+
+function addPlayer() {
+    let name = document.getElementById("Name").value;
+    let score = localStorage.getItem('score');
+    leaderboard.push({name: name, score: score});
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    displayLeaderboard();
+}
+</script>
+
+</body>
+</html>
